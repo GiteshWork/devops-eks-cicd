@@ -1,0 +1,13 @@
+# manifests/nginx-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx # This selects the pods with the label 'app: nginx' (from your deployment)
+  ports:
+    - protocol: TCP
+      port: 80       # The port on which the service will be accessible (e.g., from the LoadBalancer)
+      targetPort: 80 # The port on which the NGINX container is listening
+  type: LoadBalancer # This tells AWS to provision an Elastic Load Balancer for your service

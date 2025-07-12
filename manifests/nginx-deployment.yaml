@@ -1,0 +1,22 @@
+# manifests/nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2 # Deploy 2 copies of your NGINX application for high availability
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest # Use the latest NGINX Docker image
+        ports:
+        - containerPort: 80 # NGINX listens on port 80
