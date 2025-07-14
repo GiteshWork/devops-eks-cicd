@@ -8,7 +8,7 @@ spec:
   project: default # Use the default ArgoCD project
 
   source:
-    repoURL: https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>.git # <-- IMPORTANT: REPLACE WITH YOUR GITHUB REPO URL!
+    repoURL: https://github.com/GiteshWork/devops-eks-cicd.git
     targetRevision: HEAD # Sync from the latest commit on the main/master branch
     path: manifests # The path WITHIN YOUR GIT REPOSITORY where NGINX manifests are located
 

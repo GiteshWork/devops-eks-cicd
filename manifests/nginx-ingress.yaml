@@ -1,0 +1,23 @@
+# manifests/nginx-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb # Tells the AWS Load Balancer Controller to manage this Ingress
+    alb.ingress.kubernetes.io/scheme: internet-facing # Creates a public, internet-facing ALB
+    alb.ingress.kubernetes.io/target-type: ip # Routes traffic directly to pod IPs (efficient for EKS)
+    # Optional: For HTTP to HTTPS redirect (requires an SSL certificate which is out of scope for this basic setup)
+    # alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+spec:
+  rules:
+  - host: gitesh.duckdns.org # <-- IMPORTANT: CHANGED TO YOUR DUCKDNS DOMAIN!
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service # The name of your NGINX Service
+            port:
+              number: 80 # The port your NGINX Service is listening on
